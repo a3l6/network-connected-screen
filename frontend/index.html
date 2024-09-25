@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="valentine">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <script>
+      tailwind.config = {
+        daisyui: {
+          themes: ["valentine"],
+        },
+      };
+    </script>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js"
+      type="text/javascript"
+    ></script>
+
+    <title>Borealis</title>
+  </head>
+  <body
+    class="bg-base-100"
+    style="font-family: Figtree, Noto Sans JP, Noto Sans, Vazirmatn, sans-serif"
+  >
+    <div class="py-10">
+      <h1 class="text-3xl font-bold text-center text-primary">Borealis</h1>
+    </div>
+    <div class="flex flex-col justify-center items-center space-y-6 w-full">
+      <div class="w-[90%] p-6 bg-neutral rounded-lg">
+        <span class="text-3xl text-neutral-100"
+          ><h2 class="inline">Send to</h2>
+          <h2 class="font-bold inline">Emilio</h2></span
+        >
+
+        <div class="flex my-5">
+          <input
+            type="checkbox"
+            class="checkbox checkbox-bordered checkbox-lg"
+            id="user-1-toggle"
+          />
+          <label
+            for="checkbox"
+            class="font-bold text-neutral-content text-lg ml-3"
+            >Upload Image</label
+          >
+        </div>
+
+        <div id="input-group" class="form-control my-4">
+          <textarea
+            id="user-1-textarea"
+            class="textarea textarea-lg textarea-bordered textarea-secondary hidden"
+            placeholder="Enter message here..."
+          ></textarea>
+          <input
+            type="file"
+            id="user-1-file"
+            accept=".png,.jpg,.heic"
+            class="file-input file-input-bordered file-input-secondary"
+          />
+        </div>
+        <button onclick="submitUser1()" class="btn btn-secondary text-base-100">
+          Send to Emilio
+        </button>
+      </div>
+
+      <div class="w-[90%] p-6 bg-neutral rounded-lg">
+        <span class="text-3xl text-neutral-100"
+          ><h2 class="inline">Send to</h2>
+          <h2 class="font-bold inline">Aurora</h2></span
+        >
+
+        <div class="flex my-5">
+          <input
+            type="checkbox"
+            class="checkbox checkbox-bordered checkbox-lg"
+            id="user-2-toggle"
+          />
+          <label
+            for="checkbox"
+            class="font-bold text-neutral-content text-lg ml-3"
+            >Upload Image</label
+          >
+        </div>
+
+        <div id="input-group" class="form-control my-4">
+          <textarea
+            id="user-2-textarea"
+            class="textarea textarea-lg textarea-bordered textarea-secondary hidden"
+            placeholder="Enter message here..."
+          ></textarea>
+          <input
+            type="file"
+            id="user-2-file"
+            accept=".png,.jpg,.heic"
+            class="file-input file-input-bordered file-input-secondary"
+          />
+        </div>
+        <button onclick="submitUser2()" class="btn btn-secondary text-base-100">
+          Send to Aurora
+        </button>
+      </div>
+
+      <footer
+        class="footer footer-center bg-secondary text-base-content p-4 absolute bottom-0"
+      >
+        <aside>
+          <p>Made with 💙 from Barrie, Ontario</p>
+        </aside>
+      </footer>
+    </div>
+
+    <script>
+      function toggleInput(user) {
+        const toggle = document.getElementById(`${user}-toggle`);
+        const textarea = document.getElementById(`${user}-textarea`);
+        const fileinput = document.getElementById(`${user}-file`);
+
+        if (toggle.checked) {
+          textarea.style.display = "none";
+          fileinput.style.display = "block";
+        } else {
+          textarea.style.display = "block";
+          fileinput.style.display = "none";
+        }
+      }
+
+      function submitUser(user) {
+        const toggle = document.getElementById(`${user}-toggle`);
+        const textarea = document.getElementById(`${user}-textarea`);
+        const fileinput = document.getElementById(`${user}-file`);
+
+        const client = new Paho.MQTT.Client(
+          location.hostname,
+          Number(location.port),
+          "clientID"
+        );
+
+        client.connect({ onSuccess: onConnect });
+
+        function onConnect() {
+          console.log("Connected!");
+        }
+
+        if (toggle.checked) {
+          const message = new Paho.MQTT.Message("NCS_IMAGE");
+          message.destinationName = "NCS_Image";
+          client.send(message);
+        } else {
+        }
+      }
+
+      function submitUser1() {
+        submitUser("user-1");
+      }
+
+      function submitUser2() {
+        submitUser("user-2");
+      }
+
+      toggleInput("user-1");
+      toggleInput("user-2");
+
+      document
+        .getElementById("user-1-toggle")
+        .addEventListener("change", () => {
+          toggleInput("user-1");
+        });
+      document
+        .getElementById("user-2-toggle")
+        .addEventListener("change", () => {
+          toggleInput("user-2");
+        });
+    </script>
+  </body>
+</html>
