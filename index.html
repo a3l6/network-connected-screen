@@ -28,93 +28,117 @@
     class="bg-base-100"
     style="font-family: Figtree, Noto Sans JP, Noto Sans, Vazirmatn, sans-serif"
   >
-    <div class="py-10">
-      <h1 class="text-3xl font-bold text-center text-primary">Borealis</h1>
-    </div>
-    <div class="flex flex-col justify-center items-center space-y-6 w-full">
-      <div class="w-[90%] p-6 bg-neutral rounded-lg">
-        <span class="text-3xl text-neutral-100"
-          ><h2 class="inline">Send to</h2>
-          <h2 class="font-bold inline">Emilio</h2></span
-        >
+    <style>
+      .page-wrap {
+        min-height: 100%;
+        /* equal to footer height */
+        margin-bottom: -51.9999px;
+      }
 
-        <div class="flex my-5">
-          <input
-            type="checkbox"
-            class="checkbox checkbox-bordered checkbox-lg"
-            id="user-1-toggle"
-          />
-          <label
-            for="checkbox"
-            class="font-bold text-neutral-content text-lg ml-3"
-            >Upload Image</label
-          >
-        </div>
+      .page-wrap:after {
+        content: "";
+        display: block;
+      }
 
-        <div id="input-group" class="form-control my-4">
-          <textarea
-            id="user-1-textarea"
-            class="textarea textarea-lg textarea-bordered textarea-secondary hidden"
-            placeholder="Enter message here..."
-          ></textarea>
-          <input
-            type="file"
-            id="user-1-file"
-            accept=".png,.jpg,.heic"
-            class="file-input file-input-bordered file-input-secondary"
-          />
-        </div>
-        <button onclick="submitUser1()" class="btn btn-secondary text-base-100">
-          Send to Emilio
-        </button>
+      .site-footer,
+      .page-wrap:after {
+        height: 51.9999px;
+      }
+    </style>
+
+    <div class="page-wrap">
+      <div class="py-10">
+        <h1 class="text-3xl font-bold text-center text-primary">Borealis</h1>
       </div>
-
-      <div class="w-[90%] p-6 bg-neutral rounded-lg">
-        <span class="text-3xl text-neutral-100"
-          ><h2 class="inline">Send to</h2>
-          <h2 class="font-bold inline">Aurora</h2></span
-        >
-
-        <div class="flex my-5">
-          <input
-            type="checkbox"
-            class="checkbox checkbox-bordered checkbox-lg"
-            id="user-2-toggle"
-          />
-          <label
-            for="checkbox"
-            class="font-bold text-neutral-content text-lg ml-3"
-            >Upload Image</label
+      <div class="flex flex-col justify-center items-center space-y-6 w-full">
+        <div class="w-[90%] p-6 bg-neutral rounded-lg">
+          <span class="text-3xl text-neutral-100"
+            ><h2 class="inline">Send to</h2>
+            <h2 class="font-bold inline">Emilio</h2></span
           >
+
+          <div class="flex my-5">
+            <input
+              type="checkbox"
+              class="checkbox checkbox-bordered checkbox-lg"
+              id="user-1-toggle"
+            />
+            <label
+              for="checkbox"
+              class="font-bold text-neutral-content text-lg ml-3"
+              >Upload Image</label
+            >
+          </div>
+
+          <div id="input-group" class="form-control my-4">
+            <textarea
+              id="user-1-textarea"
+              class="textarea textarea-lg textarea-bordered textarea-secondary hidden"
+              placeholder="Enter message here..."
+            ></textarea>
+            <input
+              type="file"
+              id="user-1-file"
+              accept=".png,.jpg,.heic"
+              class="file-input file-input-bordered file-input-secondary"
+            />
+          </div>
+          <button
+            onclick="submitUser1()"
+            class="btn btn-secondary text-base-100"
+          >
+            Send to Emilio
+          </button>
         </div>
 
-        <div id="input-group" class="form-control my-4">
-          <textarea
-            id="user-2-textarea"
-            class="textarea textarea-lg textarea-bordered textarea-secondary hidden"
-            placeholder="Enter message here..."
-          ></textarea>
-          <input
-            type="file"
-            id="user-2-file"
-            accept=".png,.jpg,.heic"
-            class="file-input file-input-bordered file-input-secondary"
-          />
+        <div class="w-[90%] p-6 bg-neutral rounded-lg">
+          <span class="text-3xl text-neutral-100"
+            ><h2 class="inline">Send to</h2>
+            <h2 class="font-bold inline">Aurora</h2></span
+          >
+
+          <div class="flex my-5">
+            <input
+              type="checkbox"
+              class="checkbox checkbox-bordered checkbox-lg"
+              id="user-2-toggle"
+            />
+            <label
+              for="checkbox"
+              class="font-bold text-neutral-content text-lg ml-3"
+              >Upload Image</label
+            >
+          </div>
+
+          <div id="input-group" class="form-control my-4">
+            <textarea
+              id="user-2-textarea"
+              class="textarea textarea-lg textarea-bordered textarea-secondary hidden"
+              placeholder="Enter message here..."
+            ></textarea>
+            <input
+              type="file"
+              id="user-2-file"
+              accept=".png,.jpg,.heic"
+              class="file-input file-input-bordered file-input-secondary"
+            />
+          </div>
+          <button
+            onclick="submitUser2()"
+            class="btn btn-secondary text-base-100"
+          >
+            Send to Aurora
+          </button>
         </div>
-        <button onclick="submitUser2()" class="btn btn-secondary text-base-100">
-          Send to Aurora
-        </button>
       </div>
-
-      <footer
-        class="footer footer-center bg-secondary text-base-content p-4 static bottom-0"
-      >
-        <aside>
-          <p>Made with 💙 from Barrie, Ontario</p>
-        </aside>
-      </footer>
     </div>
-
+    <footer
+      class="footer site-footer footer-center bg-secondary text-base-content p-4 static bottom-0 mt-6"
+    >
+      <aside>
+        <p>Made with 💙 from Barrie, Ontario</p>
+      </aside>
+    </footer>
     <script>
       function toggleInput(user) {
         const toggle = document.getElementById(`${user}-toggle`);
